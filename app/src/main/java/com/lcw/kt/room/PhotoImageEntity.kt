@@ -1,8 +1,8 @@
 package com.lcw.kt.room
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.google.gson.annotations.SerializedName
 
 /**
  *
@@ -13,20 +13,19 @@ import com.google.gson.annotations.SerializedName
 @Entity(tableName = "photos")
 data class PhotoImageEntity(
     @PrimaryKey
-    @field:SerializedName("id")
     val id: String,
-    @field:SerializedName("urls")
+    @ColumnInfo(name = "urls")
     val urls: Urls,
-    @field:SerializedName("user")
+    @ColumnInfo(name = "user")
     val user: User
 )
 
 data class Urls(
-    @field:SerializedName("small")
+    @ColumnInfo(name = "small")
     val small: String,
 )
 
 data class User(
-    @field:SerializedName("username")
+    @ColumnInfo(name = "username")
     val username: String
 )
