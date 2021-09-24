@@ -1,6 +1,8 @@
 package com.lcw.kt.di
 
 import android.content.Context
+import com.lcw.kt.room.AppDatabase
+import com.lcw.kt.room.PhotoImageDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -17,4 +19,15 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 @Module
 class DatabaseModule {
+
+    @Singleton
+    @Provides
+    fun provideAppDatabase(@ApplicationContext context: Context): AppDatabase {
+        return AppDatabase.getInstance(context)
+    }
+
+    @Provides
+    fun providePhotoImageDao(appDatabase: AppDatabase): PhotoImageDao {
+        return appDatabase.photoImageDao()
+    }
 }
