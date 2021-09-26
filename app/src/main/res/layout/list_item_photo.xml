@@ -24,7 +24,7 @@
             type="android.view.View.OnClickListener"/>
         <variable
             name="photo"
-            type="com.lcw.kt.api.unsplash.UnsplashPhoto"/>
+            type="com.lcw.kt.room.PhotoImageEntity"/>
     </data>
 
     <com.lcw.kt.views.MaskedCardView
@@ -59,7 +59,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/margin_normal"
                     android:layout_marginTop="@dimen/margin_normal"
-                    android:text="@{photo.user.name}"
+                    android:text="@{photo.user.username}"
                     android:textAppearance="?attr/textAppearanceListItem"
                     android:gravity="center_horizontal"
                     app:layout_constraintEnd_toEndOf="parent"

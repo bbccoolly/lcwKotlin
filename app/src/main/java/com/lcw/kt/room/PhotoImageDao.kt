@@ -1,7 +1,7 @@
 package com.lcw.kt.room
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
-import kotlinx.coroutines.flow.Flow
 
 /**
  *
@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.Flow
 interface PhotoImageDao {
 
     @Query("SELECT * FROM photos")
-    fun getAll(): Flow<List<PhotoImageEntity>>
+    fun getAll(): LiveData<List<PhotoImageEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(entity: PhotoImageEntity)

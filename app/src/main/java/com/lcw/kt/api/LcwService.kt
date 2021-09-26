@@ -1,8 +1,8 @@
 package com.lcw.kt.api
 
 import com.lcw.kt.BuildConfig
-import com.lcw.kt.api.lcw.LcwEntity
 import com.lcw.kt.api.lcw.ResultsResponse
+import com.lcw.kt.room.PhotoImageEntity
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -21,5 +21,9 @@ interface LcwService {
         @Query("page") page: Int,
         @Query("per_page") perPage: Int,
         @Query("client_id") clientId: String = BuildConfig.UNSPLASH_ACCESS_KEY
-    ): Response<ResultsResponse<LcwEntity>>
+    ): Response<ResultsResponse<PhotoImageEntity>>
+
+    companion object {
+        const val BASE_URL = "https://api.unsplash.com/"
+    }
 }

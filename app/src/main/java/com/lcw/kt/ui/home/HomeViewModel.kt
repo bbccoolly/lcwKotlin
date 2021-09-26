@@ -9,13 +9,15 @@ import androidx.paging.cachedIn
 import com.lcw.kt.api.UnsplashRepository
 import com.lcw.kt.api.UnsplashService
 import com.lcw.kt.api.unsplash.UnsplashPhoto
+import com.lcw.kt.ui.data.PhotoUrlRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val repository: UnsplashRepository
+    private val repository: UnsplashRepository,
+    private val lcwRepository: PhotoUrlRepository
 ) : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
@@ -23,6 +25,7 @@ class HomeViewModel @Inject constructor(
     }
     val text: LiveData<String> = _text
 
+    val lcwUrls = lcwRepository.urlsData
 
     private var currentQueryValue: String? = null
     private var currentSearchResult: Flow<PagingData<UnsplashPhoto>>? = null

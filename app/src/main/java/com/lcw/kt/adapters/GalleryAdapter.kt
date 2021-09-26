@@ -20,17 +20,17 @@ import android.content.Intent
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.lcw.kt.api.unsplash.UnsplashPhoto
 import com.lcw.kt.databinding.ListItemPhotoBinding
+import com.lcw.kt.room.PhotoImageEntity
 
 /**
  * Adapter for the [RecyclerView] in [GalleryFragment].
  */
 
-class GalleryAdapter : PagingDataAdapter<UnsplashPhoto, GalleryAdapter.GalleryViewHolder>(GalleryDiffCallback()) {
+class GalleryAdapter : ListAdapter<PhotoImageEntity, GalleryAdapter.GalleryViewHolder>(GalleryDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GalleryViewHolder {
         return GalleryViewHolder(
@@ -55,14 +55,14 @@ class GalleryAdapter : PagingDataAdapter<UnsplashPhoto, GalleryAdapter.GalleryVi
         init {
             binding.setClickListener { view ->
                 binding.photo?.let { photo ->
-                    val uri = Uri.parse(photo.user.attributionUrl)
+                    val uri = Uri.parse(photo.urls.small)
                     val intent = Intent(Intent.ACTION_VIEW, uri)
                     view.context.startActivity(intent)
                 }
             }
         }
 
-        fun bind(item: UnsplashPhoto) {
+        fun bind(item: PhotoImageEntity) {
             binding.apply {
                 photo = item
                 executePendingBindings()
@@ -71,12 +71,12 @@ class GalleryAdapter : PagingDataAdapter<UnsplashPhoto, GalleryAdapter.GalleryVi
     }
 }
 
-private class GalleryDiffCallback : DiffUtil.ItemCallback<UnsplashPhoto>() {
-    override fun areItemsTheSame(oldItem: UnsplashPhoto, newItem: UnsplashPhoto): Boolean {
+private class GalleryDiffCallback : DiffUtil.ItemCallback<PhotoImageEntity>() {
+    override fun areItemsTheSame(oldItem: PhotoImageEntity, newItem: PhotoImageEntity): Boolean {
         return oldItem.id == newItem.id
     }
 
-    override fun areContentsTheSame(oldItem: UnsplashPhoto, newItem: UnsplashPhoto): Boolean {
+    override fun areContentsTheSame(oldItem: PhotoImageEntity, newItem: PhotoImageEntity): Boolean {
         return oldItem == newItem
     }
 }
